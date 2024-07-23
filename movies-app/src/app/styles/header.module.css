@@ -1,0 +1,29 @@
+.header {
+    height: 69px;
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 60px;
+}
+
+.list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #F6F6F6;
+    text-decoration: none;
+    list-style: none;
+    gap: 80px;
+}
+
+.options {
+    gap: 40px;
+}
+
+.link {
+    cursor: pointer;
+}
