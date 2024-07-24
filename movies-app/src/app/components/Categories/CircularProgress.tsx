@@ -2,11 +2,12 @@ import React from 'react';
 
 type CircularProgressProps = {
   percentage: number;
+  radius?: number;
+  stroke?: number;
+  fontSize?: number
 };
 
-const CircularProgress: React.FC<CircularProgressProps> = ({ percentage }) => {
-  const radius = 13;
-  const stroke = 1;
+const CircularProgress: React.FC<CircularProgressProps> = ({ percentage, radius = 13, stroke = 1, fontSize = 8 }) => {
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
@@ -20,6 +21,8 @@ const CircularProgress: React.FC<CircularProgressProps> = ({ percentage }) => {
   const strokeColor = getColor(percentage);
 
   const backgroundColor = `${strokeColor}33`;
+
+  const size = `${fontSize}px`
 
   return (
     <svg height={radius * 2} width={radius * 2}>
@@ -53,7 +56,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({ percentage }) => {
         textAnchor="middle"
         dy=".3em"
         fill="white"
-        fontSize="9px"
+        fontSize={size}
         fontWeight="100"
       >
         {`${percentage}%`}

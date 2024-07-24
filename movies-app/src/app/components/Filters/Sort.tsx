@@ -1,10 +1,11 @@
 import { useState } from "react";
 import styles from "@/app/styles/filters.module.css"
 import Arrow from "@/app/icons/arrow";
+import useStore from "@/app/store/store";
 
 export default function Sort() {
-  const [selectedSort, setSelectedSort] = useState("Action")
   const [name, setName] = useState("")
+  const { sortMovies } = useStore()
 
   const sorters = [
     "Categories",
@@ -19,6 +20,7 @@ export default function Sort() {
 
   const handleClick = (newName: string) => {
     setName(newName)
+    sortMovies(newName)
   }
 
   return (

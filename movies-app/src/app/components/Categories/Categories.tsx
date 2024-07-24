@@ -9,9 +9,10 @@ import MovieItem from "./Poster";
 
 export default function Categories() {
 
-  const { movies, nameList } = useStore()
-
+  const { movies, listFilterMovies, nameList } = useStore()
+  const list = listFilterMovies.length > 0 ? listFilterMovies : movies
   useEffect(() => {
+
   }, [movies])
 
   return (
@@ -25,10 +26,10 @@ export default function Categories() {
     <div>
       <h3 className={styles.titleFilters}>{nameList}</h3>
       <div className={styles.specific}>
-        {movies.map((movie, index) => (
-          <MovieItem key={movie.id} movie={movie} />
-        ))
-      }
+        {list.map((movie, index) => (
+            <MovieItem key={movie.id} movie={movie} />
+          ))
+        }
       </div>
     </div>
   }

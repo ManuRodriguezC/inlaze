@@ -11,13 +11,15 @@ type LinkProps = {
 
 export default function Link({ children, url, name = "" }: LinkProps) {
 
-  const { cleanMovies, updateMovies, updateNameList, movies } = useStore()
+  const { cleanMovies, cleanFilterMovies,  updateMovies, updateNameList, movies } = useStore()
 
   const handleClickStore = (url?: string, name?: string) => {
     const fetchMovies = async (url: string) => {
+      
       try {
         const results = await getPopularMovies(url);
         updateMovies(results.results)
+        cleanFilterMovies()
         if (name) {
           updateNameList(name)
         }
@@ -31,6 +33,7 @@ export default function Link({ children, url, name = "" }: LinkProps) {
       fetchMovies(url)
     } else {
       cleanMovies()
+      cleanFilterMovies()
     }
   }
 

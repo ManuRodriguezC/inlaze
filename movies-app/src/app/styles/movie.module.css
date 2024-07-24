@@ -1,0 +1,217 @@
+.banner {
+    width: 100%;
+    height: 560px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+    z-index: -2;
+}
+
+.back {
+    position: absolute;
+    left: 20px;
+    top: 100px;
+}
+
+.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    mask-image: linear-gradient(
+        black 50%,
+        transparent
+    );
+    opacity: 0.7;
+}
+
+.datas {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    color: white;
+    padding: 0px 50px;
+}
+
+.info {
+    width: 100%;
+    height: auto;
+    background-color: #3B3B3B;
+    display: flex;
+    flex-direction: row;
+}
+
+.contentPoster {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.play {
+    cursor: pointer;
+    height: 46px;
+    width: 100%;
+    background-color: #F0B90B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    color: #343434;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    size: 14px;
+}
+
+.contentInfo {
+    height: 100%;
+    margin-left: 10px;
+    padding: 20px;
+}
+
+.titleMovie {
+    font-family: "IMB Plex Sans", sans-serif;
+    font-size: 35px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.dates {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 310px;
+}
+
+.date {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+}
+
+.overview {
+    font-size: 24px;
+    font-family: "IMB Plex Sans", sans-serif;
+    font-weight: 700;
+    margin-top: 50px;
+}
+
+.overviewText {
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    width: 80%;
+}
+
+.score {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    align-items: center;
+}
+
+.score p {
+    width: 84px;
+    margin-left: 10px;
+}
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px 20px;
+}
+
+.genres p {
+    border-radius: 5px;
+    border: 1px solid #F0B90B;
+    color: #F0B90B;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+}
+
+.cast {
+    width: 80%;
+    padding: 20px 40px;
+}
+
+.titleInformation {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+
+.listCast {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.name {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    width: 110px;
+    color: #FFFFFF;
+}
+.name span {
+    font-weight: 100;
+}
+
+.summary {
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    color: #FFFFFF;
+}
+
+.description {
+    width: 20%;
+    height: 100%;
+    background-color: #343434;
+    padding: 20px;
+}
+
+.description div {
+    margin: 20px 0px;
+}
+
+.description div p, .description div span {
+    margin: 0;
+    color: #FFFFFF;
+    font-family: "Inter", sans-serif;
+}
+
+.description div p {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.description div span {
+    font-weight: 100;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 700px) {
+    .datas {
+        flex-direction: column;
+    }
+}

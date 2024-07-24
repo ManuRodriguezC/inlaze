@@ -22,10 +22,15 @@ export interface Movie {
   
   export interface StoreState {
     movies: Movie[];
+    listFilterMovies: Movie[];
     nameList: string;
+    nameFilter: string;
     updateNameList: (newName: string) => void;
     updateMovies: (setMovies: Movie[]) => void;
+    filterMovies: (idGenge: number) => void;
+    sortMovies: (typeSort: string) => void;
     cleanMovies: () => void;
     cleanName: () => void;
+    cleanFilterMovies: () => void;
   }
   
