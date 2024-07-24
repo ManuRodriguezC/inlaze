@@ -34,6 +34,10 @@
     border-radius: 8px;
 }
 
+.movie::marker {
+    content: "";
+}
+
 .image {
     border-radius: 8px 8px 0px 0px;
 }
@@ -89,4 +93,12 @@
 
 .icons {
     margin-bottom: 5px;
+}
+
+.specific {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin: 20px 0px;
 }

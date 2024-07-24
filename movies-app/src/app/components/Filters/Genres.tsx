@@ -2,19 +2,26 @@ import { useState } from "react";
 import styles from "@/app/styles/filters.module.css"
 import Arrow from "@/app/icons/arrow";
 
-export default function Sort() {
-  const [selectedSort, setSelectedSort] = useState("Action")
+export default function Genres() {
   const [name, setName] = useState("")
 
-  const sorters = [
-    "Categories",
-    "Title A-Z",
-    "Popularity Ascending",
-    "Popularity Descendign",
-    "Rating Ascending",
-    "Rating Descending",
-    "Release Date Ascending",
-    "Release Date Descending",
+  const genres = [
+    "Action",
+    "Adventure",
+    "Animation",
+    "Comedy",
+    "Crime",
+    "Documentary",
+    "Drama",
+    "Family",
+    "Fantasy",
+    "History",
+    "Horror",
+    "Music",
+    "Mistery",
+    "Romance",
+    "Terror",
+    "Zombis",
   ]
 
   const handleClick = (newName: string) => {
@@ -32,9 +39,9 @@ export default function Sort() {
         <Arrow />  
       </div>
 
-      <div className={styles.listCategories}>
-        {sorters.map((sort, index) => (
-          <button onClick={() => handleClick(sort)} className={styles.buttons} key={index}>{sort}</button>
+      <div className={styles.listGenres}>
+        {genres.map((gen, index) => (
+          <button onClick={() => handleClick(gen)} className={styles.buttons} key={index}>{gen}</button>
         ))}
       </div>
   </div>

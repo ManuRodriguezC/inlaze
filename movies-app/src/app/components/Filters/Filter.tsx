@@ -1,6 +1,7 @@
 import Search from "@/app/icons/Search";
 import styles from "@/app/styles/filters.module.css";
 import Sort from "./Sort";
+import Genres from "./Genres";
 
 
 export default function Filter() {
@@ -14,6 +15,8 @@ export default function Filter() {
       </form>
       <h2 className={styles.title}>Sort By</h2>
       <Sort />
+      <h2 className={styles.titleGenres}>Genres</h2>
+      <Genres />
     </div>
   )
 }
