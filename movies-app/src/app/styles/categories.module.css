@@ -2,6 +2,8 @@
     background-color: #444444;
     width: calc(100vw - 260px);
     height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .titleFilters {
