@@ -7,8 +7,8 @@ export default function Options() {
   return (
     <nav>
       <ul className={`${styles.list} ${styles.options}`}>
-        <Link href="#"><Sun /></Link>
-        <Link href="#"><SignIn /></Link>
+        <Link><Sun /></Link>
+        <Link><SignIn /></Link>
       </ul>
     </nav>
   )

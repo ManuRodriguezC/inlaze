@@ -89,6 +89,17 @@ interface Person {
   order: number;
 };
 
+interface Review {
+  author: string;
+  content: string;
+  id: string;
+  url: string;
+}
+
+interface Summary {
+  results: Review[];
+}
+
 const setDate = (date: string | undefined): string => {
   if (!date) return "June 01, 2024";
   const months: Record<string, string> = {
@@ -118,8 +129,8 @@ const setTime = (time: number | undefined): string => {
 
 export default function MoviePage({ id }: MoviePageProps) {
   const [movie, setMovie] = useState<Movie>()
-  const [cast, setCast] = useState<Person>()
-  const [summary, setSummary] = useState()
+  const [cast, setCast] = useState<Person[]>([])
+  const [summary, setSummary] = useState<Review>()
 
   const fetchMovies = async (url: string) => {
     try {
@@ -144,8 +155,10 @@ export default function MoviePage({ id }: MoviePageProps) {
       if (results) {
         setMovie(results);
       }
-      if (resultCast) {
-        setCast(resultCast.cast)
+      if (resultCast && resultCast.cast) {
+        setCast(resultCast.cast);
+      } else {
+        setCast([])
       }
       if (resultSummary) {
         setSummary(resultSummary.results[0] || null)
