@@ -11,6 +11,7 @@
 
 .sectionMovie {
     padding-top: 69px;
+    width: 100%;
 }
 
 .back {
@@ -216,7 +217,7 @@
 }
 
 .recomment {
-    width: 100%;
+    width: auto;
     height: auto;
     background-color: #1c1c1c;
     display: flex;
@@ -263,6 +264,14 @@
 
 .imageRecomment {
     border-radius: 8px 8px 0px 0px;
+}
+
+.loadingMovie {
+    height: 100vh;
+    background-color: #1c1c1c;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @media screen and (max-width: 700px) {

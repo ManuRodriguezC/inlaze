@@ -46,7 +46,7 @@ export default function Banner() {
                             <button>Gallery</button>
                             <button>Info</button>
                         </div>
-                        <div>
+                        <div className={styles.buttonsBanner}>
                             <LikeEmpty />
                             <Save />
                             <Share />

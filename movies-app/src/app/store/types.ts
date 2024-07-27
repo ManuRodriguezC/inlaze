@@ -21,10 +21,12 @@ export interface Movie {
 };
   
   export interface StoreState {
+    loginPage: boolean;
     movies: Movie[];
     listFilterMovies: Movie[];
     nameList: string;
     nameFilter: string;
+    updateLoginPage: () => void;
     updateNameList: (newName: string) => void;
     updateMovies: (setMovies: Movie[]) => void;
     filterMovies: (idGenge: number) => void;

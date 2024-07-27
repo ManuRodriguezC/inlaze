@@ -2,10 +2,14 @@ import { create } from 'zustand';
 import { Movie, StoreState } from './types';
 
 const useStore = create<StoreState>((set) => ({
+  loginPage: false,
   movies: [],
   listFilterMovies: [],
   nameList: "",
   nameFilter: "",
+  updateLoginPage: () => set((state) => ({
+    loginPage: !state.loginPage
+  })),
   updateNameList: (newName: string) => set(() => ({
     nameList: newName,
   })),
