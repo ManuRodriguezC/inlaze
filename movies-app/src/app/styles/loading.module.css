@@ -7,7 +7,7 @@
   width: 20px;
   height: 00px;
   margin: 100px auto;
-  color: #d0d0d0;
+  color: #000000;
 }
 
 .block {
@@ -18,7 +18,7 @@
   width: 12px;
   height: 12px;
   border-radius: 3px;
-  background: #FFF;
+  background: #a5a5a5;
 }
 
 .block:nth-child(4n+1) {

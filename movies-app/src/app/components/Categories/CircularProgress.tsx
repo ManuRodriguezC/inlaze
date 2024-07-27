@@ -5,9 +5,10 @@ type CircularProgressProps = {
   radius?: number;
   stroke?: number;
   fontSize?: number
+  width?: string
 };
 
-const CircularProgress: React.FC<CircularProgressProps> = ({ percentage, radius = 13, stroke = 1, fontSize = 8 }) => {
+const CircularProgress: React.FC<CircularProgressProps> = ({ percentage, radius = 13, stroke = 1, fontSize = 8, width = "100" }) => {
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
@@ -57,7 +58,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({ percentage, radius 
         dy=".3em"
         fill="white"
         fontSize={size}
-        fontWeight="100"
+        fontWeight={width}
       >
         {`${percentage}%`}
       </text>

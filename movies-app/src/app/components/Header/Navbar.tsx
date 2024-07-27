@@ -1,19 +1,19 @@
 import Logo from "@/app/icons/Logo"
 import styles from "@/app/styles/header.module.css"
-import Link from "./Link"
+import LinkNav from "./Link"
 import { listMovies } from "@/app/components/ListMoviesOptions"
 
 export default function Navbar() {
   return (
     <nav>
       <ul className={styles.list}>
-        <Link><Logo /></Link>
+        <LinkNav ><Logo /></LinkNav>
         {listMovies.map((movie, index) => (
-          <Link key={`${movie.name}-${index}`} url={movie.url} name={movie.name}>{movie.name}</Link>
+          <LinkNav key={`${movie.name}-${index}`} url={movie.url} name={movie.name}>{movie.name}</LinkNav>
           )
         )}
-        <Link>Favorites</Link>
-        <Link>Saved</Link>
+        <LinkNav >Favorites</LinkNav>
+        <LinkNav >Saved</LinkNav>
       </ul>
     </nav>
   )

@@ -2,6 +2,8 @@ import { ReactNode } from "react";
 import styles from "@/app/styles/header.module.css"
 import { getPopularMovies } from "@/app/api/moviesApi";
 import useStore from "@/app/store/store";
+import { usePathname } from "next/dist/client/components/navigation";
+import { useRouter } from "next/navigation";
 
 type LinkProps = {
   children: ReactNode;
@@ -9,13 +11,14 @@ type LinkProps = {
   name?: string;
 };
 
-export default function Link({ children, url, name = "" }: LinkProps) {
+export default function LinkNav({ children, url, name = ""}: LinkProps) {
 
+  const pathname = usePathname()
+  const router = useRouter()
   const { cleanMovies, cleanFilterMovies,  updateMovies, updateNameList, movies } = useStore()
 
   const handleClickStore = (url?: string, name?: string) => {
     const fetchMovies = async (url: string) => {
-      
       try {
         const results = await getPopularMovies(url);
         updateMovies(results.results)
@@ -23,11 +26,12 @@ export default function Link({ children, url, name = "" }: LinkProps) {
         if (name) {
           updateNameList(name)
         }
-        console.log(movies)
+        if (pathname != "/") {
+          router.push('/')
+        }
       } catch (err) {
         console.error('Error fetching movies:', err);
-      } finally {
-      }
+      } 
     };
     if (url) {
       fetchMovies(url)
@@ -38,6 +42,6 @@ export default function Link({ children, url, name = "" }: LinkProps) {
   }
 
   return (
-    <li onClick={() => handleClickStore(url, name)} className={styles.link}>{children}</li>
+      <li onClick={() => handleClickStore(url, name)} className={styles.link}>{children}</li>
   );
 }

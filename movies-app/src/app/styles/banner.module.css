@@ -1,0 +1,80 @@
+.banner {
+    width: 100%;
+    height: 560px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+    z-index: -2; /* Este z-index no afecta la posición de los hijos */
+}
+
+.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -50; /* Esto coloca la imagen detrás de otros elementos */
+    mask-image: linear-gradient(black 50%, transparent);
+}
+
+.infoBanner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: end;
+    padding: 40px 60px;
+    font-family: "IBM Plex Sans", sans-serif;
+    z-index: 50; /* Esto coloca el banner de información por encima de la imagen */
+}
+
+.infoBanner h3 {
+    font-size: 35px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.score {
+    color: #FFFFFF;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 92%;
+}
+
+.score p {
+    width: 70%;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.downInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.genres {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    width: 488px;
+}
+
+.genres button {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 0;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}

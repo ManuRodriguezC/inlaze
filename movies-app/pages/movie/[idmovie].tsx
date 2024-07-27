@@ -1,104 +1,18 @@
 import { GetServerSideProps } from 'next';
 import Header from '@/app/components/Header/Header';
-import stylesMain from "@/app/styles/page.module.css";
 import { useEffect, useState } from 'react';
 import { getPopularMovies } from '@/app/api/moviesApi';
 import styles from "@/app/styles/movie.module.css"
 import Image from 'next/image';
-import Play from '@/app/icons/Play';
 import CircularProgress from '@/app/components/Categories/CircularProgress';
 import Link from 'next/link';
 import Back from '@/app/icons/Back';
 import Loading from '@/app/components/Categories/Loading';
+import { Movie, MoviePageProps, Person, Review } from '@/app/components/Types';
+import Play from '@/app/icons/Play';
+import { fetchMovies } from '@/app/api/fechtMovies';
 
-interface MoviePageProps {
-  id: string;
-}
 
-interface BelongsToCollection {
-  id: number;
-  name: string;
-  poster_path: string;
-  backdrop_path: string;
-}
-
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface ProductionCompany {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: string;
-}
-
-interface ProductionCountry {
-  iso_3166_1: string;
-  name: string;
-}
-
-interface SpokenLanguage {
-  english_name: string;
-  iso_639_1: string;
-  name: string;
-}
-
-interface Movie {
-  adult: boolean;
-  backdrop_path: string;
-  belongs_to_collection?: BelongsToCollection;
-  budget: number;
-  genres: Genre[];
-  homepage: string;
-  id: number;
-  imdb_id: string;
-  origin_country: string[];
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  production_companies: ProductionCompany[];
-  production_countries: ProductionCountry[];
-  release_date: string;
-  revenue: number;
-  runtime: number;
-  spoken_languages: SpokenLanguage[];
-  status: string;
-  tagline: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
-
-interface Person {
-  adult: boolean;
-  gender: number;
-  id: number;
-  known_for_department: string;
-  name: string;
-  original_name: string;
-  popularity: number;
-  profile_path: string;
-  cast_id: number;
-  character: string;
-  credit_id: string;
-  order: number;
-};
-
-interface Review {
-  author: string;
-  content: string;
-  id: string;
-  url: string;
-}
-
-interface Summary {
-  results: Review[];
-}
 
 const setDate = (date: string | undefined): string => {
   if (!date) return "June 01, 2024";
@@ -131,27 +45,19 @@ export default function MoviePage({ id }: MoviePageProps) {
   const [movie, setMovie] = useState<Movie>()
   const [cast, setCast] = useState<Person[]>([])
   const [summary, setSummary] = useState<Review>()
-
-  const fetchMovies = async (url: string) => {
-    try {
-      const results = await getPopularMovies(url);
-      return results
-    } catch (err) {
-      console.error('Error fetching movies:', err);
-    } finally {
-    }
-  };
+  const [recomment, setRecomment] = useState([])
 
   useEffect(() => {
     const urlMovie = `https://api.themoviedb.org/3/movie/${id}`
     const urlCast = `https://api.themoviedb.org/3/movie/${id}/credits`
     const urlSummary = `https://api.themoviedb.org/3/movie/${id}/reviews`
+    const urlRecomment = `https://api.themoviedb.org/3/movie/${id}/similar`
 
     const fetchAndSetMovies = async () => {
       const results = await fetchMovies(urlMovie);
       const resultCast = await fetchMovies(urlCast);
       const resultSummary = await fetchMovies(urlSummary);
-      console.log(resultSummary)
+      const resultRecomment = await fetchMovies(urlRecomment)
       if (results) {
         setMovie(results);
       }
@@ -163,6 +69,9 @@ export default function MoviePage({ id }: MoviePageProps) {
       if (resultSummary) {
         setSummary(resultSummary.results[0] || null)
       }
+      if (resultRecomment && resultRecomment.results) {
+        setRecomment(resultRecomment.results)
+      }
     };
 
     fetchAndSetMovies();
@@ -172,7 +81,7 @@ export default function MoviePage({ id }: MoviePageProps) {
     <main className={styles.main}>
     <Header />
     {movie ? 
-    <section className={styles.section}>
+    <section className={styles.sectionMovie}>
       <Link className={styles.back} href={"/"}><Back /></Link>
       <section className={styles.banner}>
         <Image
@@ -182,8 +91,9 @@ export default function MoviePage({ id }: MoviePageProps) {
             fill
             sizes="100vw"
             />
-        <section className={styles.datas}>
-          <div className={styles.contentPoster}>
+      <section className={styles.datas}>
+
+        <div className={styles.contentPoster}>
             <Image
               className={styles.poster}
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -191,10 +101,11 @@ export default function MoviePage({ id }: MoviePageProps) {
               width={305}
               height={395}
               />
-              <h4 className={styles.play}>Official Trailer
+              <button className={styles.play}>Official Trailer
                 <Play />
-              </h4>
-            </div>
+              </button>
+          </div>
+
           <div className={styles.contentInfo}>
             <h3 className={styles.titleMovie}>{movie.title}</h3>
             <div className={styles.dates}>
@@ -220,6 +131,7 @@ export default function MoviePage({ id }: MoviePageProps) {
         </section>
       
       </section>
+
       <section className={styles.info}>
         <div className={styles.cast}>
           <h3 className={styles.titleInformation}>Cast</h3>
@@ -243,6 +155,7 @@ export default function MoviePage({ id }: MoviePageProps) {
               </p>
           </div>
         </div>
+
         <div className={styles.description}>
           <div>
             <p>Director:</p>
@@ -289,9 +202,28 @@ export default function MoviePage({ id }: MoviePageProps) {
           </div>
         </div>
       </section>
+      <section className={styles.recomment}>
+        <h3 className={styles.titlerecomment}>Recommendations</h3>
+        <div className={styles.listRecomment}>
+          {recomment.length > 0 && recomment.slice(0, 6).map((recom: any) => (
+            <Link key={`posterRecomment${recom.id}`} href={`/movie/${recom.id}`} className={styles.posterRecomment}>
+                <Image
+                    src={`https://image.tmdb.org/t/p/w500${recom.poster_path}`}
+                    alt={movie.overview}
+                    width={200}
+                    height={253}
+                    className={styles.imageRecomment}
+                    />
+                <p> 
+                  {recom.original_title}
+                </p>
+            </Link>
+          ))}
+        </div>
+      </section>
     </section>
     :
-    <div>
+    <div className={styles.loadingMovie}>
       <Loading />
     </div>
     } 

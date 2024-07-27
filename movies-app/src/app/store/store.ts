@@ -59,8 +59,6 @@ const useStore = create<StoreState>((set) => ({
         return dateA - dateB;
       });
     }
-    console.log(sortedMovies)
-    
     return { movies: sortedMovies };
   }),
   cleanMovies: () => set(() => ({

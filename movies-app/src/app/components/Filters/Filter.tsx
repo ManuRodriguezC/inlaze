@@ -46,7 +46,7 @@ export default function Filter() {
           onChange={(e) => setQuery(e.target.value)}
         />
         <button type="submit" aria-label="Search" disabled={loading}>
-          {loading ? "Loading..." : <Search />}
+          <Search />
         </button>
       </form>
 

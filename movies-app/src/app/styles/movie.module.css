@@ -9,6 +9,10 @@
     z-index: -2;
 }
 
+.sectionMovie {
+    padding-top: 69px;
+}
+
 .back {
     position: absolute;
     left: 20px;
@@ -29,6 +33,7 @@
     );
     opacity: 0.7;
 }
+
 
 .datas {
     position: relative;
@@ -208,6 +213,56 @@
 .description div span {
     font-weight: 100;
     font-size: 15px;
+}
+
+.recomment {
+    width: 100%;
+    height: auto;
+    background-color: #1c1c1c;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+    padding: 20px 40px;
+}
+
+.titlerecomment {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+.listRecomment {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.posterRecomment {
+    display: flex;
+    flex-direction: column;
+}
+
+.posterRecomment p {
+    width: 185px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #262626;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 15px 5px;
+    padding-left: 10px;
+    border-radius: 0px 0px 8px 8px;
+    text-decoration: none;
+    list-style: none;
+}
+
+.imageRecomment {
+    border-radius: 8px 8px 0px 0px;
 }
 
 @media screen and (max-width: 700px) {
