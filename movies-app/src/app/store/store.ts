@@ -1,15 +1,43 @@
 import { create } from 'zustand';
-import { Movie, StoreState } from './types';
+import { Movie, MovieList, StoreState } from './types';
 
 const useStore = create<StoreState>((set) => ({
+  login: false,
+  username: "",
   loginPage: false,
   movies: [],
   listFilterMovies: [],
   nameList: "",
   nameFilter: "",
+  listFavories: [],
+  listSaved: [],
+  loginSesion: (newName: string, favorites: MovieList[], saved: MovieList[]) => set(() => ({
+    login: true,
+    username: newName,
+    listFavories: favorites,
+    listSaved: saved,
+  })),
+  closeSesion: () => set(() => ({
+    login: false,
+    username: '',
+    listFavories: [],
+    listSaved: []
+  })),
+  updateUsername: (newName: string) => set(() => ({
+    login: true,
+    username: newName,
+  })),
   updateLoginPage: () => set((state) => ({
     loginPage: !state.loginPage
   })),
+  updateFavoriteList: (newMovie: any) => set((state) => {
+    const exists = state.listFavories.some(m => m.id_movie === newMovie.id);
+    return {
+      listFavories: exists
+        ? state.listFavories.filter(m => m.id_movie !== newMovie.id)
+        : [...state.listFavories, newMovie]
+    };
+  }),
   updateNameList: (newName: string) => set(() => ({
     nameList: newName,
   })),

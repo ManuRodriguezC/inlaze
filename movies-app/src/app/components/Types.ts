@@ -27,6 +27,17 @@ export interface Movie {
     vote_count: number;
 }
 
+export interface MovieList {
+    id_movie: number;
+    title?: string;
+    name?: string;
+    overview: string;
+    poster_path: string;
+    release_date?: string;
+    first_air_date?: string;
+    vote_average: number;
+}
+
 export interface MoviePageProps {
     id: string;
 }

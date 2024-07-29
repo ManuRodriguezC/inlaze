@@ -5,7 +5,8 @@ import styles from "@/app/styles/categories.module.css";
 import Loading from "./Loading";
 import { getPopularMovies } from "@/app/api/moviesApi";
 import NotFound from "./NotFound";
-import MovieItem from "./Poster" // Importa el nuevo componente
+import MovieItem from "./Poster"; // Importa el nuevo componente
+import { MovieList } from "../Types";
 
 type Movie = {
   backdrop_path: string;
@@ -30,10 +31,11 @@ type Movie = {
 
 type MoviesProps = {
   children: ReactNode;
-  url: string;
+  url?: string;
+  listMovies?: MovieList[];
 };
 
-export default function RowMovies({ children, url }: MoviesProps) {
+export default function RowMovies({ children, url, listMovies }: MoviesProps) {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState<Movie[]>([]);
 
@@ -46,7 +48,6 @@ export default function RowMovies({ children, url }: MoviesProps) {
         setMovies([]);
       }
     } catch (err) {
-      console.error('Error fetching movies:', err);
       setMovies([]);
     } finally {
       setLoading(false);
@@ -54,8 +55,48 @@ export default function RowMovies({ children, url }: MoviesProps) {
   };
 
   useEffect(() => {
-    fetchMovies(url);
-  }, [url]);
+    if (listMovies) {
+      console.log(listMovies)
+    }
+    if (url && !listMovies) {
+      fetchMovies(url);
+    } else {
+      setLoading(false);
+    }
+  }, [url, listMovies]);
+
+  type CommonMovie = {
+    id: number;
+    title: string;
+    overview: string;
+    poster_path: string;
+    release_date: string;
+    vote_average: number;
+  };
+
+  const adaptMovies = (movies: Movie[]): CommonMovie[] => {
+    return movies.map(movie => ({
+      id: movie.id,
+      title: movie.title || movie.name || "Not fount",
+      release_date: movie.release_date || movie.first_air_date || "2024-02-19",
+      overview: movie.overview,
+      poster_path: movie.poster_path,
+      vote_average: movie.vote_average,
+    }));
+  };
+  
+  const adaptListMovies = (listMovies: MovieList[]): CommonMovie[] => {
+    return listMovies.map(movie => ({
+      id: movie.id_movie,
+      title: movie.title || movie.name || "Not found",
+      overview: movie.overview,
+      poster_path: movie.poster_path,
+      release_date: movie.release_date || "2022-12-13",
+      vote_average: movie.vote_average,
+    }));
+  };
+
+  const displayMovies = listMovies ? adaptListMovies(listMovies) : adaptMovies(movies)
 
   return (
     <div className={styles.categories}>
@@ -64,13 +105,13 @@ export default function RowMovies({ children, url }: MoviesProps) {
         <Loading />
       ) : (
         <ul className={styles.listMovies}>
-          {movies.length > 0 ? (
-            movies.map((movie) => (
+          {
+            displayMovies.length > 0 ? 
+            displayMovies.map((movie) => (
               <MovieItem key={movie.id} movie={movie} />
-            ))
-          ) : (
+            )) : 
             <NotFound />
-          )}
+          }
         </ul>
       )}
     </div>

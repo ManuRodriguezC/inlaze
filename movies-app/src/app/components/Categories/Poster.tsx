@@ -4,6 +4,7 @@ import Like from "@/app/icons/Like";
 import Save from "@/app/icons/Save";
 import styles from "@/app/styles/categories.module.css";
 import Link from "next/link";
+import useStore from "@/app/store/store";
 
 type Movie = {
   id: number;
@@ -41,16 +42,18 @@ const setDate = (date: string | undefined): string => {
 };
 
 export default function MovieItem({ movie }: MovieItemProps) {
+  const { updateFavoriteList } = useStore()
   return (
-    <Link href={`/movie/${movie.id}`}>
-      <li className={styles.movie} key={movie.id}>
-        <Image
-          className={styles.image}
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.overview}
-          width={180}
-          height={223}
-          />
+    <li className={styles.movie} key={movie.id}>
+        <Link href={`/movie/${movie.id}`}>
+          <Image
+            className={styles.image}
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.overview}
+            width={180}
+            height={223}
+            />
+        </Link>
         <div className={styles.datas}>
           <h3 className={styles.titleMovie}>{movie.title || movie.name}</h3>
           <span className={styles.date}>
@@ -63,7 +66,7 @@ export default function MovieItem({ movie }: MovieItemProps) {
             </div>
             <div className={styles.rating}>
               <h5>Favorites</h5>
-              <Like />
+              <Like movie={movie} />
             </div>
             <div className={styles.rating}>
               <h5>Save</h5>
@@ -72,6 +75,5 @@ export default function MovieItem({ movie }: MovieItemProps) {
           </div>
         </div>
       </li>
-    </Link>
   );
 }
